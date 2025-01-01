@@ -114,9 +114,30 @@ pnpm run format # 自動格式化程式碼
 
 ## TestOps
 
+- [Understanding Playwright and Jest: A Strategic Guide for Effective Testing](https://medium.com/@saiyar.jo147th248/understanding-playwright-and-jest-a-strategic-guide-for-effective-testing-9d58c37c89f8)
+
 ### BDD/SBE
 
 ### Playwright
+
+- https://playwright.dev/docs/intro
+- https://github.com/davidseow/how-to-playwright
+- [playwright-bdd](https://github.com/vitalets/playwright-bdd)
+  - [Executing BDD tests with Playwright](https://willholmes.hashnode.dev/executing-bdd-tests-with-playwright)
+  - [Generate BDD tests with ChatGPT and run them with Playwright]([https://medium.com/@vitaliypotapov/generate-bdd-tests-with-chatgpt-and-run-them-with-playwright-e1ce29d7a7bd](https://medium.com/@vitaliypotapov/generate-bdd-tests-with-chatgpt-and-run-them-with-playwright-e1ce29d7a7bd))
+- [cucumber-js](https://github.com/cucumber/cucumber-js)
+  - `pnpm add @cucumber/cucumber`
+
+```sh
+pnpm create playwright
+
+pnpm exec playwright codegen
+
+pnpm exec playwright test
+# pnpm exec playwright test --ui
+
+pnpm exec playwright show-report
+```
 
 ### Behave
 
