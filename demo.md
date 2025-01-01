@@ -10,10 +10,7 @@
     * [FastAPI](#fastapi)
     * [Integration](#integration)
   * [TestOps](#testops)
-    * [BDD/SBE](#bddsbe)
     * [Playwright](#playwright)
-    * [Behave](#behave)
-    * [TDD](#tdd)
     * [Jest](#jest)
     * [PyTest](#pytest)
     * [Allure Report](#allure-report)
@@ -25,11 +22,11 @@
 
 ## Goal
 
-- [ ] Fundamentals
-  - [ ] Learn [Next.js] + [FastAPI] integration
+- [x] Fundamentals
+  - [x] Learn [Next.js] + [FastAPI] integration
 - [ ] TestOps
-  - [ ] Add BDD/SBE example using [Playwright] & [Behave]
-  - [ ] Add TDD example using [Jest] & [PyTest] 
+  - [x] Add BDD/SBE example using [Playwright]
+  - [ ] Add TDD example using [Jest] & [PyTest]
   - [ ] Add [Allure] to integrate test reports
 - [ ] DevOps
   - [ ] Deploy to Vercel
@@ -114,21 +111,19 @@ pnpm run format # 自動格式化程式碼
 
 ## TestOps
 
-- [Understanding Playwright and Jest: A Strategic Guide for Effective Testing](https://medium.com/@saiyar.jo147th248/understanding-playwright-and-jest-a-strategic-guide-for-effective-testing-9d58c37c89f8)
-
-### BDD/SBE
-
 ### Playwright
 
 - https://playwright.dev/docs/intro
-- https://github.com/davidseow/how-to-playwright
 - [playwright-bdd](https://github.com/vitalets/playwright-bdd)
   - `npx bddgen && npx playwright test`
   - [Executing BDD tests with Playwright](https://willholmes.hashnode.dev/executing-bdd-tests-with-playwright)
   - [Generate BDD tests with ChatGPT and run them with Playwright]([https://medium.com/@vitaliypotapov/generate-bdd-tests-with-chatgpt-and-run-them-with-playwright-e1ce29d7a7bd](https://medium.com/@vitaliypotapov/generate-bdd-tests-with-chatgpt-and-run-them-with-playwright-e1ce29d7a7bd))
   - [Combine BDD with classic playwright tests](https://github.com/vitalets/playwright-bdd/issues/242)
-- [cucumber-js](https://github.com/cucumber/cucumber-js)
-  - `pnpm add @cucumber/cucumber`
+- Ref
+  - https://github.com/davidseow/how-to-playwright
+  - [Understanding Playwright and Jest: A Strategic Guide for Effective Testing](https://medium.com/@saiyar.jo147th248/understanding-playwright-and-jest-a-strategic-guide-for-effective-testing-9d58c37c89f8)
+- BDD/SBE
+  - [SBE BDD TDD CDD](https://github.com/ProgramMurTw/pai-sensei/blob/main/tech/sbe-bdd-tdd-cdd.md#what-is-the-most-popular-an-useful-sbe-framework-being-used)
 
 ```sh
 pnpm create playwright
@@ -147,15 +142,58 @@ pnpm i -D playwright-bdd
 npx bddgen && npx playwright test
 
 # check .features-gen/
+
+# convert webm to gif to show video on GitHub
+# ffmpeg -i video.webm -pix_fmt rgb24 output.gif
+# gifsicle -O3 output.gif -o optimized.gif
+
+find test-results/ -type f -name "*.webm" -exec bash -c 'ffmpeg -i "$0" -pix_fmt rgb8 "${0%.webm}.gif" && gifsicle --optimize=3 --batch "${0%.webm}.gif"' {} \;
 ```
 
-### Behave
+<img style="width:60%;" src="test-results/nextjs-fastapi-demo-nextjs-fastapi-demo-firefox/video.gif" alt="">
 
-### TDD
+Others
+
+- [cucumber-js](https://github.com/cucumber/cucumber-js)
+  - `pnpm add @cucumber/cucumber`
+- [活文件 (living document) - Given When Then](https://alincode.github.io/learning-e2e-testing-with-python/living_document.html)
+- [Behave介绍和快速示例](https://blog.csdn.net/oscar999/article/details/134431154) + Selenium
+  - [pytest-bdd](https://github.com/pytest-dev/pytest-bdd)
 
 ### Jest
 
 ### PyTest
+
+- Ref
+  - [FastAPI - Testing](https://fastapi.tiangolo.com/tutorial/testing/)
+
+```sh
+pip install httpx
+pytest
+```
+
+`test_example_helloworld.py`
+
+```py
+from fastapi import FastAPI
+from fastapi.testclient import TestClient
+
+app = FastAPI()
+
+
+@app.get("/")
+async def read_main():
+    return {"msg": "Hello World"}
+
+
+client = TestClient(app)
+
+
+def test_read_main():
+    response = client.get("/")
+    assert response.status_code == 200
+    assert response.json() == {"msg": "Hello World"}
+```
 
 ### Allure Report
 
@@ -170,9 +208,15 @@ npx bddgen && npx playwright test
 <!-- Links -->
 
 [Next.js]: https://github.com/vercel/next.js/
+
 [FastAPI]: https://github.com/fastapi/fastapi
+
 [Playwright]: https://github.com/microsoft/playwright
-[Behave]: https://github.com/behave/behave 
+
+[Behave]: https://github.com/behave/behave
+
 [Jest]: https://github.com/jestjs/jest
+
 [PyTest]: https://github.com/pytest-dev/pytest
+
 [Allure]: https://github.com/allure-framework/allure2
