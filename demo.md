@@ -123,8 +123,10 @@ pnpm run format # 自動格式化程式碼
 - https://playwright.dev/docs/intro
 - https://github.com/davidseow/how-to-playwright
 - [playwright-bdd](https://github.com/vitalets/playwright-bdd)
+  - `npx bddgen && npx playwright test`
   - [Executing BDD tests with Playwright](https://willholmes.hashnode.dev/executing-bdd-tests-with-playwright)
   - [Generate BDD tests with ChatGPT and run them with Playwright]([https://medium.com/@vitaliypotapov/generate-bdd-tests-with-chatgpt-and-run-them-with-playwright-e1ce29d7a7bd](https://medium.com/@vitaliypotapov/generate-bdd-tests-with-chatgpt-and-run-them-with-playwright-e1ce29d7a7bd))
+  - [Combine BDD with classic playwright tests](https://github.com/vitalets/playwright-bdd/issues/242)
 - [cucumber-js](https://github.com/cucumber/cucumber-js)
   - `pnpm add @cucumber/cucumber`
 
@@ -137,6 +139,14 @@ pnpm exec playwright test
 # pnpm exec playwright test --ui
 
 pnpm exec playwright show-report
+
+# playwright-bdd
+pnpm i -D playwright-bdd
+
+# code features & steps
+npx bddgen && npx playwright test
+
+# check .features-gen/
 ```
 
 ### Behave

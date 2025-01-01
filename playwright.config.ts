@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import { defineBddConfig } from 'playwright-bdd';
 
 /**
  * Read environment variables from file.
@@ -11,6 +12,12 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+
+const testDirBdd = defineBddConfig({
+  features: 'features/*.feature',
+  steps: 'features/steps/*.ts',
+});
+
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -30,6 +37,7 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    screenshot: 'on',
     video: {
       mode: 'on',
       size: { width: 1366, height: 768 },
@@ -41,6 +49,7 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      testDir: testDirBdd
     },
 
     {
