@@ -49,10 +49,11 @@
   - [ESLint](https://eslint.org/docs/latest/use/getting-started)
     - [Understanding ESLint Configuration: .eslintrc.js vs .eslintrc vs .eslintrc.json](https://medium.com/@ritz.sh/understanding-eslint-configuration-eslintrc-js-vs-eslintrc-vs-eslintrc-json-287ec5e95bf4)
     - [VS Code 安裝 Prettier、ESLint](https://medium.com/@ars37111337/vs-code-%E5%AE%89%E8%A3%9D-prettier-eslint-70dbb12c5cab)
-    - https://nextjs.tw/docs/basic-features/eslint
-    - https://github.com/jsx-eslint/eslint-plugin-react
-    - https://github.com/airbnb/javascript
+    - [Next.js ESLint](https://nextjs.tw/docs/basic-features/eslint)
+    - [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react)
+    - [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
   - Ref
+    - [Next13+：專案初始化一文到底紀錄](https://medium.com/@chu23294752/next13-專案初始化一文到底紀錄-f0b5ef5acae9)
     - [monorepo: pnpm + eslint + prettier + husky + lintstaged + commitlint + changesets](https://github.com/muravjev/configs)
     - [pnpm搭建Monorepo工程涵盖集成ts + eslint + prettier + husky + lint-staged + commitizen](https://juejin.cn/post/7358398963840647219)
 - `FastAPI: python3, pyenv, pip`
@@ -159,8 +160,39 @@ Others
 - [活文件 (living document) - Given When Then](https://alincode.github.io/learning-e2e-testing-with-python/living_document.html)
 - [Behave介绍和快速示例](https://blog.csdn.net/oscar999/article/details/134431154) + Selenium
   - [pytest-bdd](https://github.com/pytest-dev/pytest-bdd)
+  - [BDD - Python Behave 入门](https://blog.csdn.net/wumingxiaoyao/article/details/135115353)
 
 ### Jest
+
+- [Setting up Jest with Next.js](https://nextjs.org/docs/app/building-your-application/testing/jest)
+- https://jestjs.io/docs/getting-started
+  - [Testing React Apps](https://jestjs.io/docs/tutorial-react)
+- Ref
+  - [Day 05 React 測試安裝介紹 ( CRA / Vite / Next.js )](https://ithelp.ithome.com.tw/m/articles/10322782)
+  - [使用 Jest 和 React Testing Library 進行測試的方法](https://5xcampus.com/posts/jest-react-testing-library.html)
+  - [Note - React Testing](https://pjchender.dev/react/note-react-testing/)
+  - [react-testing-library](https://github.com/testing-library/react-testing-library)
+
+```sh
+# pnpm add -D jest
+pnpm create jest@latest
+
+pnpm add -D babel-jest @babel/core @babel/preset-env
+pnpm add -D @babel/preset-typescript
+
+code babel.config.js
+
+## babel.config.js
+module.exports = {
+  presets: [['@babel/preset-env', {targets: {node: 'current'}}]],
+}; 
+##
+
+
+# code my-test.test.js
+
+jest my-test --notify --config=config.json
+```
 
 ### PyTest
 
@@ -196,6 +228,49 @@ def test_read_main():
 ```
 
 ### Allure Report
+
+- [Allure Report Demo](https://demo.allurereport.org/)
+- [Getting started with Allure Playwright](https://allurereport.org/docs/playwright/)
+- [Getting started with Allure Pytest](https://allurereport.org/docs/pytest/)
+- CI/CD
+  - [GitHub Actions integration](https://allurereport.org/docs/integrations-github/)
+  - [allure-docker-service](https://github.com/fescobar/allure-docker-service)
+  - [allure-server](https://github.com/kochetkov-ma/allure-server)
+  - [allure-report-publisher](https://github.com/andrcuns/allure-report-publisher)
+  - [allure-report-deployer](https://github.com/cybersokari/allure-report-deployer)
+- Ref
+  - [Allure Reporting and Playwright: Quick Setup, Powerful Insights](https://medium.com/@merisstupar11/allure-reporting-and-playwright-quick-setup-powerful-insights-900a237a524d)
+
+```sh
+pnpm add -D @playwright/test allure-playwright
+
+code playwright.config.ts
+
+## playwright.config.ts
+export default defineConfig({
+  // ...
+  reporter: [["line"], ["allure-playwright"]],
+});
+##
+
+pnpx playwright test
+
+allure generate --single-file allure-results
+# or
+# allure serve allure-results
+
+# pnpm add -D allure-commandline
+# npx allure generate ./allure-results --clean --single-file
+# npx allure open ./allure-report
+
+
+source .venv/bin/activate
+pip3 install allure-pytest
+
+python -m pytest --alluredir allure-results
+
+# allure serve allure-results
+```
 
 ## DevOps
 
